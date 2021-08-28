@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Geolocation</title>
+
+<style media="screen">
+    .google_canvas{
+
+        height: 50vh;
+        width: 50vh;
+
+    }
+
+    </style>
+    </head>
+    <body>
+        <div id="google_canvas" class="google_canvas"></div>
+
+
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+(function(){
+if(!!navigator.geolocation){
+
+var map;
+var mapOptions = {
+
+    zoom:15,
+
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+
+map = new google.maps.Map( document.getElementById("google_canvas"), mapOptions);
+
+navigator.geolocation.getCurrentPosition(function(position){
+
+var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+var infoWindow = new google.maps.InfoWindow({
+
+    map: map,
+    position: geolocate,
+    content:
+    '<h1>Esta es tu ubicacion con Geolocation</h1>' +
+    '<h2>latitud: '+position.coords.latitude+'</h2>' +
+    '<h2>longitud: '+position.coords.longitude+'</h2>' 
+});
+
+map.setCenter(geolocate);
+});
+
+
+}else{
+
+    document.getElementById("google_canvas").innerHTML = "La geolocalizacion no esta soportada ";
+}
+})();
+
+</script>
+
+    </body>
+</html>
