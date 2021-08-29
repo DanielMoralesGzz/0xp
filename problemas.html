@@ -23,12 +23,12 @@
     
 </div>
 
-    <table style="float: left;">
-        <tr>
-        <td><label>Nombre completo</label></td>
+<div class='cont2'>
+    <tr>
+        <td><label id='q1'>Nombre completo</label></td>
         </tr>
         <tr>
-        <td><input class="input" type="text" id="q1"></td>
+        <td><input class="input" type="text" id="q1" onkeydown="search(this)"></td>
         </tr>
         <tr>
         <td><label>Dirección</label></td>
@@ -87,12 +87,74 @@
         <td><label>Imagen:</label></td>
         </tr>
         <tr>
-        <td><input class="input" type="file" id="Imagen" accept="image/*"></td>
+        <td><input class="input" type="file" id="Imagen" accept="image/*" onkeydown="search()"></td>
         </tr>
         <tr>
-        <td><input type="submit" value="submit"></td>
+        <td><input type="submit" value="submit" onkeydown="search()"></td>
         </tr>
+</div>
+    <table style="float: left;">
+        
 
-   
+ <!--Mapa-->       
+
+ <style media="screen">
+    .google_canvas{
+        margin-left: 2%;
+        height: 50vh;
+        width: 50vh;
+        
+        float: left;
+    }
+
+    </style>
+    </head>
+    <body>
+        <div id="google_canvas" class="google_canvas"></div>
+
+
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+(function(){
+if(!!navigator.geolocation){
+
+var map;
+var mapOptions = {
+
+    zoom:15,
+
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+
+map = new google.maps.Map( document.getElementById("google_canvas"), mapOptions);
+
+navigator.geolocation.getCurrentPosition(function(position){
+
+var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+var infoWindow = new google.maps.InfoWindow({
+
+    map: map,
+    position: geolocate,
+    content:
+    '<h1>Esta es tu ubicacion con Geolocation</h1>' +
+    '<h2>latitud: '+position.coords.latitude+'</h2>' +
+    '<h2>longitud: '+position.coords.longitude+'</h2>' 
+});
+
+map.setCenter(geolocate);
+});
+
+
+}else{
+
+    document.getElementById("google_canvas").innerHTML = "La geolocalizacion no esta soportada ";
+}
+})();
+function search(ele) {
+    if(event.key === 'Enter') {
+    }
+}
+</script>
 </body>
 </html>

@@ -129,3 +129,13 @@ textarea{
     font-size: 16px;
     resize: none;
 }
+.cont2{
+    background-color: #F8EDE3;
+    height: 30vh;
+    width: 25vw;
+    margin-left:2.5%;
+    margin-top:3%;
+    box-shadow: 0 0 20px 0 rgba(192, 176, 196, 0.2), 0 5px 5px 0 rgba(153, 31, 31, 0.24);
+    padding: 2%;
+    float: left;
+}
