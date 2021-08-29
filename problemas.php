@@ -1,3 +1,16 @@
+<?php
+    $servidor="localhost";
+    $usuario="root";
+    $clave="";
+    $baseDeDatos="prob";
+
+    $enlace=mysqli_connect($servidor, $usuario, $clave, $baseDeDatos);
+
+    if(!$enlace){
+        echo"Error en la conexion";
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,32 +28,32 @@
             <tr>
                 <td class='en'><a href="index.html"><img src="img/aantah_logo.jpg"  height="50%" width="50%"></a> </a> </td>
                 <td class='en'><a href="about.html">About Us</a></td>
-                <td class='en'><a href="problemas.html">Problemas</a></td>
-                <td class='en'><a href="contact.html">Contactanos</a></td>
+                <td class='en'><a href="problemas.php">Problemas</a></td>
+                <td class='en'><a href="contact.php">Contactanos</a></td>
                 <td class='en'><a href="login.html">Login</a></td>
             </tr>
             </table>
     
 </div>
-
+<form action="#" class="prob" id="prob" name="prob" method="POST">
 <div class='cont2'>
     <tr>
         <td><label id='q1'>Nombre completo</label></td>
         </tr>
         <tr>
-        <td><input class="input" type="text" id="q1" onkeydown="search(this)"></td>
+        <td><input class="input" type="text" id="nombre" class="nombre"></td>
         </tr>
         <tr>
         <td><label>Dirección</label></td>
         </tr>
         <tr>
-        <td><input class="input" type="text" id="q2"></td>
+        <td><input class="input" type="text" id="direccion" class="direccion"></td>
         </tr>
         <tr>
         <td><label>Codigo Postal:</label></td>
         </tr>
         <tr>
-        <td><input class="input" type="text" id="q3"></td>
+        <td><input class="input" type="number" id="codigop" class="codigop"></td>
         </tr>
         <tr>
         <td><label>Estado:</label></td>
@@ -83,27 +96,62 @@
         </select>
         </td>
         </tr>
+        <br>
+        <br>
         <tr>
         <td><label>Imagen:</label></td>
         </tr>
         <tr>
-        <td><input class="input" type="file" id="Imagen" accept="image/*" onkeydown="search()"></td>
+        <td><input class="input" type="file" id="Imagen" accept="image/*" ></td>
         </tr>
         <tr>
-        <td><input type="submit" value="submit" onkeydown="search()"></td>
+        <td><input type="submit" value="submit" ></td>
         </tr>
 </div>
+
+<div class='cont2_1'>
+    
+        <tr>
+        <td><label>Tipo de problema</label></td>
+        
+        <select name="Problema">
+            <option value="Basura">Basura</option>
+            <option value="Grafitti">Grafitti</option>
+            <option value="Arboles">Falta de arboles</option>
+            <option value="Baches">Baches</option>
+            <option value="Banqueta">Falta de banqueta</option>
+
+            
+
+        </select>
+<br>
+<br>
+<br>
+        <tr>
+            <td><input class="input" type="text" id="msjprob" class="msjprob"></td>
+            </tr>
+           
+
+        </tr> 
     <table style="float: left;">
         
+        
+        <br><br>
+        <input class="boton" type="submit" name="reportar" onclick="" value="Reportar">
+</table>
+</div>
+</form>
 
- <!--Mapa-->       
+ 
+
+<!--Mapa-->       
 
  <style media="screen">
     .google_canvas{
-        margin-left: 2%;
-        height: 50vh;
-        width: 50vh;
-        
+        margin-left: 15%;
+        height: 43vh;
+        width: 145vh;
+        margin-top: 2%;
         float: left;
     }
 
@@ -151,10 +199,27 @@ map.setCenter(geolocate);
     document.getElementById("google_canvas").innerHTML = "La geolocalizacion no esta soportada ";
 }
 })();
-function search(ele) {
-    if(event.key === 'Enter') {
-    }
-}
+
 </script>
 </body>
 </html>
+<?php
+    if(isset($_POST['reportar'])){
+        $nombre=$_POST["nombre"];
+        $direccion=$_POST["direccion"];
+        $codigop=$_POST["codigop"];
+        $msjprob=$_POST["msjprob"];
+        $id=1;
+
+        $insertarDatos = "INSERT INTO datos VALUES('$nombre',
+                                                    '$direccion',
+                                                    '$codigop',,
+                                                    '$msjprob',
+                                                    '$id')";
+        $ejecutarInsertar = mysqli_query($enlace, $insertarDatos);
+
+        if(!$ejecutarInsertar){
+            echo"Error en sql";
+        }
+    }
+?>

@@ -60,3 +60,19 @@ map.setCenter(geolocate);
 
     </body>
 </html>
+<?php
+    $consulta="SELECT * FROM datos  WHERE nombre IN (
+        SELECT MAX(nombre) FROM datos GROUP BY correo";
+    $ejecutarConsulta=mysqli_query($enlace, $consulta);
+    $verFilas=mysqli_query($ejecutarConsulta);
+    $fila=mysqli_fetch_array($ejecutarConsulta);
+
+    if(!$ejecutarConsulta){
+        echo"Error en consulta";
+    }else{
+        if($verFilas<1){
+            echo"alert('Pepe')";
+            }
+        }
+      );
+?>
