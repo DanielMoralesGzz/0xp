@@ -57,7 +57,7 @@ alert('Gracias por registrarse, '+ nombre)
     <input class="inp" type="password" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña">
     <p>He leido y acepto los <a href="#">Terminos y Condiciones</a></p>
     <input class="boton" name="registrarse" type="submit" onclick="register()" value="Registrarse">
-    <p><a href="login.html">¿Ya estoy registrado?</a></p>
+    <p><a href="login.php">¿Ya estoy registrado?</a></p>
 </section>
 </body>
 </html>
@@ -68,7 +68,7 @@ alert('Gracias por registrarse, '+ nombre)
         $Correo=$_POST["correo"];
         $Contraseña=$_POST["contraseña"];
         $id=rand(1,99);
-
+         
         $insertarDatos = "INSERT INTO datos VALUES('$Nombre',
                                                     '$Usuario',
                                                     '$Correo',
